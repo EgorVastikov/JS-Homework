@@ -15,12 +15,6 @@ for (let i = arr.length - 1; i > 0; --i) {
 console.log(arr);
 
 let n = 3;
-let index = -1;
+let index = arr.indexOf(n);
 
-for (let i = 0; i < count; ++i) {
-    if (arr[i] === n) {
-        index = i;
-        break;
-    }
-}
-console.log(index === -1 ? "Элемент не найден" : index)
+console.log(index);
