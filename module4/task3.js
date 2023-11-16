@@ -1,0 +1,20 @@
+let count = 5;
+arr = [];
+
+for (let i = 1; i < count + 1; ++i) {
+    arr.push(i);
+}
+
+for (let i = arr.length - 1; i > 0; --i) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+console.log(arr);
+
+let n = 3;
+let index = arr.indexOf(n);
+
+console.log(index);
