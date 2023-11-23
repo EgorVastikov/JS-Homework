@@ -1,35 +1,45 @@
 (function() {
     function saveTodosToLocalStorage(listName, todos) {
-        // localStorage.removeItem(key);
         localStorage.setItem(listName, JSON.stringify(todos));
     }
 
     function getTodosFromLocalStorage(listName) {
         let storedTodos = localStorage.getItem(listName);
-        storedTodos = JSON.parse(storedTodos);
+        let todos;
+        if (storedTodos) {
+            try {
+                todos = JSON.parse(storedTodos);
+            } catch (e) {
+                console.error('Ошибка при разборе todos из localStorage:', e);
+                todos = [];
+            }
+        } else {
+            todos = [];
+        }
+        return todos;
     }
 
-    function addTodoItem(todo, todos, todoList) {
+    function addTodoItem(todo, todos, todoList, listName) {
         let todoItem = createTodoItem(todo.name, todo.done);
     
         todoItem.doneButton.addEventListener('click', function() {
             todoItem.item.classList.toggle('list-group-item-success');
             todo.done = !todo.done;
-            saveTodosToLocalStorage(todos);
+            saveTodosToLocalStorage(listName, todos);
         });
     
         todoItem.deleteButton.addEventListener('click', function() {
             if (confirm('Вы уверены?')) {
                 todoItem.item.remove();
                 todos = todos.filter(function(t) { return t.id !== todo.id; });
-                saveTodosToLocalStorage(todos);
+                saveTodosToLocalStorage(listName, todos);
             }
         });
     
         todoList.append(todoItem.item);
     }
 
-    // сщздаём и возвращаем заголовок приложения
+    // создаём и возвращаем заголовок приложения
     function createAppTitle(title) {
         let appTitle = document.createElement('h2')
         appTitle.innerHTML = title;
@@ -118,20 +128,19 @@
         let todoAppTitle = createAppTitle(title);
         let todoItemForm = createTodoItemForm();
         let todoList = createTodoList();
-
-        function saveTodosToLocalStorage(todos) {
-            localStorage.setItem(listName, JSON.stringify(todos));
-        }
-
-        function getTodosFromLocalStorage() {
-            let storedTodos = localStorage.getItem(listName);
-            return storedTodos ? JSON.parse(storedTodos) : [];
-        }
+        getTodosFromLocalStorage(listName); 
 
         // массив дел из localStorage
-        let todos = getTodosFromLocalStorage();
+        let todos = getTodosFromLocalStorage(listName);
+        if (!Array.isArray(todos)) {
+            console.error('todos is not an array:', todos);
+            todos = [];
+        }
 
         function getMaxId() {
+            if (!Array.isArray(todos)) {
+                return 0;
+            }
             return todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) : 0;
         }
 
@@ -139,10 +148,15 @@
         container.append(todoItemForm.form);
         container.append(todoList);
 
-        todos.forEach(function(todo) {
-            addTodoItem(todo, todos, todoList);
-        });
-
+        console.log(todos);
+        if (Array.isArray(todos)) {
+            todos.forEach(function(todo) {
+                addTodoItem(todo, todos, todoList, listName);
+            });
+        } else {
+            console.error('todos is not an array:', todos);
+        }
+        
         // браузер создаёт событие submit на форме по нажатию Enter или на кнопку создания дела
         todoItemForm.form.addEventListener('submit', function(e) {
             // эта строчка необходима, чтобы предотвратить стандартной действие браузера
@@ -163,12 +177,14 @@
             };
 
             todos.push(todoObject);
-            addTodoItem(todo, todos, todoList);
-            saveTodosToLocalStorage(todos);
+            addTodoItem(todoObject, todos, todoList);
+            saveTodosToLocalStorage(listName, todos);
 
             todoItemForm.input.value = '';
         });
     };  
 
-    window.createTodoApp = createTodoApp;
+    window.createTodoApp = createTodoApp;        
 })();
+
+
