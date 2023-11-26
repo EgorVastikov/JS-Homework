@@ -1,0 +1,66 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.data-sort {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #28a745;
+}
+
+h1 {
+    font-size: 26px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.filter-form, .input-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+
+.input-group-append {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.input-group button {
+    margin-left: 10px;
+}
