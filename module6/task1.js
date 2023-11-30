@@ -16,19 +16,7 @@ let result = getOlderUser(user1, user2);
 console.log(result);
 
 function getOlderUserArray(users) {
-    if (users.length === 0) {
-        return 'Пустой список';
-    }
-
-    let oldestUser = users[0];
-
-    for (let i = 1; i < users.length; i++) {
-        if (users[i].age > oldestUser.age) {
-            oldestUser = users[i];
-        }
-    }
-
-    return oldestUser.name;
+    return users.sort((user1, user2) => -(user1.age - user2.age));
 }
 
 let allUsers=[
