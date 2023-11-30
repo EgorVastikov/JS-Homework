@@ -292,10 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteCell = document.createElement('td');
         deleteCell.appendChild(deleteButton);
 
-        row.appendChild(nameCell);
-        row.appendChild(facultyCell);
-        row.appendChild(birthDateCell);
-        row.appendChild(yearsStudyCell);
+        row.appendChild(nameCell,faculty, dataBirth, yearsStudy)
         row.append(deleteButton);
 
         return row;
