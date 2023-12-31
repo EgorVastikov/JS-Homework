@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="style.css">
+    <title>My restaurant</title>
+</head>
+<body>
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div> 
+    </div>
+    <header>
+        <div class="header-data-wrapper">
+            <div class="bars-wrapper">
+                <button class="bars-btn">
+                    <i class='fa fa-bars'></i>
+                </button>
+            </div>
+            <div class="header-data">
+                <h1>My restaurant</h1>
+                <button class="view-cart-btn">
+                    <i class='fa fa-shopping-cart'></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="menu"></div>
+    <div class="cart" class="cart">
+        <h2>Корзина</h2>
+        <ul class="cart-items"></ul>
+        <p>Итого: <span class="total-amount">0.00</span> ₽</p>
+        <button class="checkout-btn" disabled="true">ОФОРМИТЬ ЗАКАЗ</button>
+    </div>
+
+    <button class="arrow-up-btn">
+        <i class='fa fa-arrow-up'></i>
+    </button>
+</body>
+<script src="script.js"></script>
+</html>
